@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1AC4D0351AF0239200C6D616 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4D0341AF0239200C6D616 /* main.cpp */; };
+		1AC4D0401AF037E700C6D616 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4D03F1AF037E700C6D616 /* Node.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,11 @@
 /* Begin PBXFileReference section */
 		1AC4D0311AF0239200C6D616 /* cmsc481proj1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cmsc481proj1; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AC4D0341AF0239200C6D616 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		1AC4D03B1AF0274D00C6D616 /* Graph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
+		1AC4D03C1AF027CD00C6D616 /* Node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
+		1AC4D03D1AF0343F00C6D616 /* DijkstraNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DijkstraNode.h; sourceTree = "<group>"; };
+		1AC4D03E1AF0376300C6D616 /* DijkstraGraph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DijkstraGraph.h; sourceTree = "<group>"; };
+		1AC4D03F1AF037E700C6D616 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +64,11 @@
 			isa = PBXGroup;
 			children = (
 				1AC4D0341AF0239200C6D616 /* main.cpp */,
+				1AC4D03E1AF0376300C6D616 /* DijkstraGraph.h */,
+				1AC4D03F1AF037E700C6D616 /* Node.cpp */,
+				1AC4D03B1AF0274D00C6D616 /* Graph.h */,
+				1AC4D03C1AF027CD00C6D616 /* Node.h */,
+				1AC4D03D1AF0343F00C6D616 /* DijkstraNode.h */,
 			);
 			path = cmsc481proj1;
 			sourceTree = "<group>";
@@ -119,6 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1AC4D0351AF0239200C6D616 /* main.cpp in Sources */,
+				1AC4D0401AF037E700C6D616 /* Node.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
