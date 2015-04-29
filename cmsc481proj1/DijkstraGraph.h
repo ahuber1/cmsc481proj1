@@ -8,8 +8,6 @@
 #ifndef cmsc481proj1_DijkstraGraph_h
 #define cmsc481proj1_DijkstraGraph_h
 
-#include "Graph.h"
-
 using namespace std;
 
 class DijkstraGraph {

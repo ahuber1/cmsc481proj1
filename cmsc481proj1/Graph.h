@@ -9,8 +9,6 @@
 #ifndef cmsc481proj1_Graph_h
 #define cmsc481proj1_Graph_h
 
-#include "Node.h"
-
 using namespace std;
 
 class Graph {

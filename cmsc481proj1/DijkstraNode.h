@@ -9,8 +9,6 @@
 #ifndef cmsc481proj1_DijkstraNode_h
 #define cmsc481proj1_DijkstraNode_h
 
-#include "Node.h"
-
 class DijkstraNode : public Node {
     
 public:

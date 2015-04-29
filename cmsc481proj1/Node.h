@@ -9,6 +9,8 @@
 #ifndef cmsc481proj1_Node_h
 #define cmsc481proj1_Node_h
 
+#include <map>
+
 using namespace std;
 
 class Node {
@@ -16,15 +18,11 @@ class Node {
 public:
     Node(char * nodeName);
     void addLink(Node pointB, int weight);
-    Pair<Char *, int>[] getLinks();
+    pair<pair<Node, int> *, int> getLinks();
+    bool operator==(const Node otherNode);
+    bool operator==(const Node * otherNode);
     
 private:
-    template<typedef K, typedef V>
-    struct Pair {
-        K key;
-        V value;
-    };
-    
     map<Node, int> neighbors;
     char * nodeName;
 };
