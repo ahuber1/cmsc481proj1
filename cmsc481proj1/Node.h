@@ -21,6 +21,7 @@ public:
     pair<pair<Node, int> *, int> getLinks();
     bool operator==(const Node otherNode);
     bool operator==(const Node * otherNode);
+    char * getNodeName();
     
 private:
     map<Node, int> neighbors;

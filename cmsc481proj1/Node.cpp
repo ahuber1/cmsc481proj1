@@ -14,7 +14,7 @@ using namespace std;
 Node::Node(char * nodeName) {
     
     if (nodeName == 0)
-        throw 0; // nodeName is null
+        throw 0; // ERROR 0: nodeName is null
     
     this->nodeName = nodeName;
     neighbors = map<Node, int>();
@@ -46,4 +46,8 @@ bool Node::operator==(const Node otherNode) {
 
 bool Node::operator==(const Node *otherNode) {
     return strcmp(nodeName, otherNode->nodeName) == 0;
+}
+
+char * Node::getNodeName() {
+    return nodeName;
 }
