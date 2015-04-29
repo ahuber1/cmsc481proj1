@@ -11,7 +11,7 @@
 
 using namespace std;
 
-DijkstraNode::DijkstraNode(char * nodeName) : Node(nodeName){
+DijkstraNode::DijkstraNode(char * nodeName) : Node(nodeName) {
     visited = false;
     shortestNeighbor = 0;
 }

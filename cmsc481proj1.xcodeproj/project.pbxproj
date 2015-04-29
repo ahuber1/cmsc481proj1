@@ -11,6 +11,7 @@
 		1AC4D0401AF037E700C6D616 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4D03F1AF037E700C6D616 /* Node.cpp */; };
 		1AC4D0421AF0751F00C6D616 /* DijkstraNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4D0411AF0751F00C6D616 /* DijkstraNode.cpp */; };
 		1AC4D0441AF0FBCD00C6D616 /* Graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4D0431AF0FBCD00C6D616 /* Graph.cpp */; };
+		1AC4D0461AF0FF2300C6D616 /* DijkstraGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4D0451AF0FF2300C6D616 /* DijkstraGraph.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,7 @@
 		1AC4D03F1AF037E700C6D616 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
 		1AC4D0411AF0751F00C6D616 /* DijkstraNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DijkstraNode.cpp; sourceTree = "<group>"; };
 		1AC4D0431AF0FBCD00C6D616 /* Graph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Graph.cpp; sourceTree = "<group>"; };
+		1AC4D0451AF0FF2300C6D616 /* DijkstraGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DijkstraGraph.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 			children = (
 				1AC4D0341AF0239200C6D616 /* main.cpp */,
 				1AC4D03E1AF0376300C6D616 /* DijkstraGraph.h */,
+				1AC4D0451AF0FF2300C6D616 /* DijkstraGraph.cpp */,
 				1AC4D03F1AF037E700C6D616 /* Node.cpp */,
 				1AC4D03B1AF0274D00C6D616 /* Graph.h */,
 				1AC4D0431AF0FBCD00C6D616 /* Graph.cpp */,
@@ -135,6 +138,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1AC4D0461AF0FF2300C6D616 /* DijkstraGraph.cpp in Sources */,
 				1AC4D0441AF0FBCD00C6D616 /* Graph.cpp in Sources */,
 				1AC4D0351AF0239200C6D616 /* main.cpp in Sources */,
 				1AC4D0421AF0751F00C6D616 /* DijkstraNode.cpp in Sources */,

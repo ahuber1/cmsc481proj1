@@ -8,9 +8,9 @@
 #ifndef cmsc481proj1_DijkstraGraph_h
 #define cmsc481proj1_DijkstraGraph_h
 
-using namespace std;
+#include "Graph.h"
 
-class DijkstraGraph {
+class DijkstraGraph : public Graph {
     
 public:
     DijkstraGraph();
