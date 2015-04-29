@@ -9,16 +9,20 @@
 #ifndef cmsc481proj1_DijkstraNode_h
 #define cmsc481proj1_DijkstraNode_h
 
+#include <map>
+#include "Node.h"
+
 class DijkstraNode : public Node {
     
 public:
-    Pair<Node,int>[] getUnvisitedLinks();
-    void setShortestNeighbor(Pair<Node, int> shortestNeighbor);
-    Pair<Node, int> getShortestNeighbor();
+    DijkstraNode(char * nodeName);
+    pair<pair<Node, int> *, int> getUnvisitedLinks();
+    void setShortestNeighbor(pair<Node, int> * shortestNeighbor);
+    pair<Node, int> getShortestNeighbor();
     
 private:
     bool visited;
-    Pair<Node, int> shortestNeighbor;
+    pair<Node, int> * shortestNeighbor;
 };
 
 #endif
