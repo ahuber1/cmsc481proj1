@@ -10,6 +10,7 @@
 #define cmsc481proj1_Graph_cpp
 
 #include "Graph.h"
+#include <iostream>
 
 Graph::Graph() {
     nodes = map<char *, Node>();
@@ -29,9 +30,9 @@ Node * Graph::getNode(char * nodeName) {
 
 void Graph::addNode(Node nodeToAdd) {
     if (nodes.find(nodeToAdd.getNodeName()) == nodes.end())
-        throw 2; // ERROR 2 : node already exists in graph
-    else
         nodes.insert(pair<char *, Node>(nodeToAdd.getNodeName(), nodeToAdd));
+    else
+        throw 2; // ERROR 2 : node already exists in graph
 }
 
 #endif

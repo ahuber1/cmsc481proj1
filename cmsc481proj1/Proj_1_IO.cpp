@@ -28,8 +28,8 @@ void processTokens(string * tokens, DijkstraGraph * graph, char * sourceNodeName
         const char * POINT_B_NAME = tokens[1].c_str();
         const char * WEIGHT_STR   = tokens[2].c_str();
         
-        char pointAname[100];
-        char pointBname[100];
+        char * pointAname = new char[100];
+        char * pointBname = new char[100];
         
         strcpy(pointAname, POINT_A_NAME);
         strcpy(pointBname, POINT_B_NAME);
@@ -61,17 +61,23 @@ void processTokens(string * tokens, DijkstraGraph * graph, char * sourceNodeName
 void processBuffer(char * buffer, const int BUFFER_SIZE, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName) {
     
     string tokens[3];
+    
+    tokens[0] = "";
+    tokens[1] = "";
+    tokens[2] = "";
+    
     int tokenIndex = 0;
     
     for (int bufferInd = 0; bufferInd < BUFFER_SIZE; bufferInd++) {
-        if(buffer[bufferInd] == 0)
-            bufferInd = BUFFER_SIZE; // end loop
-        else if (buffer[bufferInd] == '\n') {
+        if (buffer[bufferInd] == 0) {
             tokenIndex = 0;
             processTokens(tokens, graph, sourceNodeName, destinationNodeName);
+            bufferInd = BUFFER_SIZE;
         }
-        else if (buffer[bufferInd] == '&')
+        else if (buffer[bufferInd] == '$')
             tokenIndex++;
+        else
+            tokens[tokenIndex] += buffer[bufferInd];
     }
 }
 
@@ -80,10 +86,10 @@ void readFile(char * fileName, DijkstraGraph * graph, char * sourceNodeName, cha
     ifstream file;
     file.open(fileName);
     const int BUFFER_SIZE = 100;
-    char buffer[BUFFER_SIZE];
     
     if(file.is_open()) {
         while (!file.eof()) {
+            char buffer[BUFFER_SIZE];
             file >> buffer;
             processBuffer(buffer, BUFFER_SIZE, graph, sourceNodeName, destinationNodeName);
         }

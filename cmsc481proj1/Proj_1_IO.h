@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <iostream>
 #include <fstream>
+#include <map>
 #include "DijkstraGraph.h"
 
 void readFile(char * fileName, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName);

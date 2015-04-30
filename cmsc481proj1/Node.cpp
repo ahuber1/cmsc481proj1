@@ -9,6 +9,7 @@
 #ifndef cmsc481proj1_Node_cpp
 #define cmsc481proj1_Node_cpp
 
+#include <iostream>
 #include <stdio.h>
 #include "Node.h"
 
@@ -34,7 +35,7 @@ bool Node::isLinked(Node *otherNode) {
     pair<pair<Node *, int> *, int> linksPair = getLinks();
     
     for (int i = 0; i < linksPair.second; i++) {
-        if (linksPair.first[i].first == otherNode)
+        if (*linksPair.first[i].first == *otherNode)
             return true;
     }
     
