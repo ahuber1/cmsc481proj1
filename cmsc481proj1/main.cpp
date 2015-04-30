@@ -7,9 +7,19 @@
 //
 
 #include <iostream>
+#include "DijkstraGraph.h"
+#include "Proj_1_IO.h"
 
 int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+    
+    DijkstraGraph graph = DijkstraGraph();
+    
+    char fileName[] = "input.txt";
+    DijkstraGraph * graphPtr = &graph;
+    char sourceNodeName[100];
+    char destinationNodeName[100];
+    
+    readFile(fileName, graphPtr, sourceNodeName, destinationNodeName);
+    
     return 0;
 }

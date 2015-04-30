@@ -30,6 +30,8 @@
 /* Begin PBXFileReference section */
 		1A1DFE771AF2665100F91981 /* Proj_1_IO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Proj_1_IO.cpp; sourceTree = "<group>"; };
 		1A1DFE781AF2665100F91981 /* Proj_1_IO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Proj_1_IO.h; sourceTree = "<group>"; };
+		1A38E9C81AF2AD7F009D9E30 /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		1A38E9C91AF2AD7F009D9E30 /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
 		1AC4D0311AF0239200C6D616 /* cmsc481proj1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cmsc481proj1; sourceTree = BUILT_PRODUCTS_DIR; };
 		1AC4D0341AF0239200C6D616 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		1AC4D03B1AF0274D00C6D616 /* Graph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
@@ -77,6 +79,8 @@
 				1AC4D0451AF0FF2300C6D616 /* DijkstraGraph.cpp */,
 				1A1DFE771AF2665100F91981 /* Proj_1_IO.cpp */,
 				1A1DFE781AF2665100F91981 /* Proj_1_IO.h */,
+				1A38E9C81AF2AD7F009D9E30 /* input.txt */,
+				1A38E9C91AF2AD7F009D9E30 /* TemplateIcon2x.png */,
 				1AC4D03F1AF037E700C6D616 /* Node.cpp */,
 				1AC4D03B1AF0274D00C6D616 /* Graph.h */,
 				1AC4D0431AF0FBCD00C6D616 /* Graph.cpp */,

@@ -8,41 +8,8 @@
 
 #include "Proj_1_IO.h"
 
-void readFile(char * fileName, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName) {
-    
-    ifstream file;
-    file.open(fileName);
-    const int BUFFER_SIZE = 100;
-    char buffer[BUFFER_SIZE];
-    
-    if(file.is_open()) {
-        while (!file.eof()) {
-            file >> buffer;
-            processBuffer(buffer, BUFFER_SIZE, graph, sourceNodeName, destinationNodeName);
-        }
-    }
-    else
-        throw 4; // ERROR 4: unable to open file
-}
-
-void processBuffer(char * buffer, const int BUFFER_SIZE, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName) {
-    
-    string tokens[3];
-    int tokenIndex = 0;
-    
-    for (int bufferInd = 0; bufferInd < BUFFER_SIZE; bufferInd++) {
-        if(buffer[bufferInd] == 0)
-            bufferInd = BUFFER_SIZE; // end loop
-        else if (buffer[bufferInd] == '\n') {
-            tokenIndex = 0;
-            processTokens(tokens, graph, sourceNodeName, destinationNodeName);
-        }
-        else if (buffer[bufferInd] == '&')
-            tokenIndex++;
-    }
-}
-
 void processTokens(string * tokens, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName) {
+    
     for(int a = 0; a < 3; a++) {
         for(int b = 0; b < tokens[a].length(); b++) {
             tokens[a][b] = (char) tolower(tokens[a][b]);
@@ -85,5 +52,39 @@ void processTokens(string * tokens, DijkstraGraph * graph, char * sourceNodeName
             pointA->addLink(pointB, weight);
             pointB->addLink(pointA, weight);
         }
+    }
+}
+
+void readFile(char * fileName, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName) {
+    
+    ifstream file;
+    file.open(fileName);
+    const int BUFFER_SIZE = 100;
+    char buffer[BUFFER_SIZE];
+    
+    if(file.is_open()) {
+        while (!file.eof()) {
+            file >> buffer;
+            processBuffer(buffer, BUFFER_SIZE, graph, sourceNodeName, destinationNodeName);
+        }
+    }
+    else
+        throw 4; // ERROR 4: unable to open file
+}
+
+void processBuffer(char * buffer, const int BUFFER_SIZE, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName) {
+    
+    string tokens[3];
+    int tokenIndex = 0;
+    
+    for (int bufferInd = 0; bufferInd < BUFFER_SIZE; bufferInd++) {
+        if(buffer[bufferInd] == 0)
+            bufferInd = BUFFER_SIZE; // end loop
+        else if (buffer[bufferInd] == '\n') {
+            tokenIndex = 0;
+            processTokens(tokens, graph, sourceNodeName, destinationNodeName);
+        }
+        else if (buffer[bufferInd] == '&')
+            tokenIndex++;
     }
 }
