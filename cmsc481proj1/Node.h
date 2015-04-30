@@ -16,6 +16,7 @@ using namespace std;
 class Node {
     
 public:
+    Node();
     Node(char * nodeName);
     void addLink(Node * pointB, int weight);
     pair<pair<Node *, int> *, int> getLinks();

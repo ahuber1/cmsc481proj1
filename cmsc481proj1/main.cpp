@@ -14,7 +14,7 @@ int main(int argc, const char * argv[]) {
     
     DijkstraGraph graph = DijkstraGraph();
     
-    char fileName[] = "input.txt";
+    char fileName[] = "/Users/andrew_huber/Dropbox/spring_2015/cmsc481/project1/code/cmsc481proj1/cmsc481proj1/input.txt";
     DijkstraGraph * graphPtr = &graph;
     char sourceNodeName[100];
     char destinationNodeName[100];

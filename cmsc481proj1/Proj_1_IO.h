@@ -16,4 +16,4 @@
 
 void readFile(char * fileName, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName);
 
-#endif /* defined(__cmsc481proj1__Proj_1_IO__) */
+#endif

@@ -14,7 +14,7 @@ class DijkstraGraph : public Graph {
     
 public:
     DijkstraGraph();
+    void addNode(char *nodeName);
 };
-
 
 #endif

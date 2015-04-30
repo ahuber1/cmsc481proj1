@@ -6,6 +6,9 @@
 //  Copyright (c) 2015 Andrew Huber. All rights reserved.
 //
 
+#ifndef __cmsc481proj1__Proj_1_IO
+#define __cmsc481proj1__Proj_1_IO
+
 #include "Proj_1_IO.h"
 
 void processTokens(string * tokens, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName) {
@@ -25,8 +28,8 @@ void processTokens(string * tokens, DijkstraGraph * graph, char * sourceNodeName
         const char * POINT_B_NAME = tokens[1].c_str();
         const char * WEIGHT_STR   = tokens[2].c_str();
         
-        char * pointAname;
-        char * pointBname;
+        char pointAname[100];
+        char pointBname[100];
         
         strcpy(pointAname, POINT_A_NAME);
         strcpy(pointBname, POINT_B_NAME);
@@ -55,6 +58,23 @@ void processTokens(string * tokens, DijkstraGraph * graph, char * sourceNodeName
     }
 }
 
+void processBuffer(char * buffer, const int BUFFER_SIZE, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName) {
+    
+    string tokens[3];
+    int tokenIndex = 0;
+    
+    for (int bufferInd = 0; bufferInd < BUFFER_SIZE; bufferInd++) {
+        if(buffer[bufferInd] == 0)
+            bufferInd = BUFFER_SIZE; // end loop
+        else if (buffer[bufferInd] == '\n') {
+            tokenIndex = 0;
+            processTokens(tokens, graph, sourceNodeName, destinationNodeName);
+        }
+        else if (buffer[bufferInd] == '&')
+            tokenIndex++;
+    }
+}
+
 void readFile(char * fileName, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName) {
     
     ifstream file;
@@ -72,19 +92,4 @@ void readFile(char * fileName, DijkstraGraph * graph, char * sourceNodeName, cha
         throw 4; // ERROR 4: unable to open file
 }
 
-void processBuffer(char * buffer, const int BUFFER_SIZE, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName) {
-    
-    string tokens[3];
-    int tokenIndex = 0;
-    
-    for (int bufferInd = 0; bufferInd < BUFFER_SIZE; bufferInd++) {
-        if(buffer[bufferInd] == 0)
-            bufferInd = BUFFER_SIZE; // end loop
-        else if (buffer[bufferInd] == '\n') {
-            tokenIndex = 0;
-            processTokens(tokens, graph, sourceNodeName, destinationNodeName);
-        }
-        else if (buffer[bufferInd] == '&')
-            tokenIndex++;
-    }
-}
+#endif

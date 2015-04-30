@@ -6,16 +6,19 @@
 //  Copyright (c) 2015 Andrew Huber. All rights reserved.
 //
 
+#ifndef cmsc481proj1_Node_cpp
+#define cmsc481proj1_Node_cpp
+
 #include <stdio.h>
 #include "Node.h"
 
 using namespace std;
 
+Node::Node() {
+    Node(0);
+}
+
 Node::Node(char * nodeName) {
-    
-    if (nodeName == 0)
-        throw 0; // ERROR 0: nodeName is null
-    
     this->nodeName = nodeName;
     neighbors = map<Node *, int>();
 }
@@ -62,3 +65,5 @@ bool Node::operator==(const Node *otherNode) {
 char * Node::getNodeName() {
     return nodeName;
 }
+
+#endif

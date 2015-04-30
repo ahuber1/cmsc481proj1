@@ -6,28 +6,36 @@
 //  Copyright (c) 2015 Andrew Huber. All rights reserved.
 //
 
+#ifndef cmsc481proj1_DijkstraNode_cpp
+#define cmsc481proj1_DijkstraNode_cpp
+
 #include <stdio.h>
 #include "DijkstraNode.h"
 
 using namespace std;
+
+DijkstraNode::DijkstraNode() : Node() {
+    visited = false;
+    shortestNeighbor = 0;
+}
 
 DijkstraNode::DijkstraNode(char * nodeName) : Node(nodeName) {
     visited = false;
     shortestNeighbor = 0;
 }
 
-pair<pair<Node, int> *, int> DijkstraNode::getUnvisitedLinks() {
-    pair<pair<Node, int> *, int> allLinksPair = getLinks();
-    pair<Node, int> * allLinks = allLinksPair.first;
+pair<pair<Node *, int> *, int> DijkstraNode::getUnvisitedLinks() {
+    pair<pair<Node *, int> *, int> allLinksPair = getLinks();
+    pair<Node *, int> * allLinks = allLinksPair.first;
     int arrayLen = allLinksPair.second;
-    pair<Node, int> * unvisitedLinks = new pair<Node,int>[arrayLen];
+    pair<Node *, int> * unvisitedLinks = new pair<Node *,int>[arrayLen];
     int all = 0;
     int unvisited = 0;
     
     while(all < arrayLen) {
-        pair<Node, int> link = allLinks[all];
-        Node node = link.first;
-        DijkstraNode * dnPtr = static_cast<DijkstraNode *>(&node);
+        pair<Node *, int> link = allLinks[all];
+        Node * node = link.first;
+        DijkstraNode * dnPtr = static_cast<DijkstraNode *>(node);
         
         if (dnPtr->visited == true) {
             unvisitedLinks[unvisited] = link;
@@ -37,13 +45,15 @@ pair<pair<Node, int> *, int> DijkstraNode::getUnvisitedLinks() {
         all++;
     }
     
-    return pair<pair<Node, int> *, int>(unvisitedLinks, unvisited);
+    return pair<pair<Node *, int> *, int>(unvisitedLinks, unvisited);
 }
 
-void DijkstraNode::setShortestNeighbor(pair<Node, int> * shortestNeighbor) {
+void DijkstraNode::setShortestNeighbor(pair<Node *, int> * shortestNeighbor) {
     this->shortestNeighbor = shortestNeighbor;
 }
 
-pair<Node, int> DijkstraNode::getShortestNeighbor() {
+pair<Node *, int> DijkstraNode::getShortestNeighbor() {
     return *shortestNeighbor;
 }
+
+#endif

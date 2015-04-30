@@ -6,14 +6,16 @@
 //  Copyright (c) 2015 Andrew Huber. All rights reserved.
 //
 
-#include <stdio.h>
+#ifndef cmsc481proj1_Graph_cpp
+#define cmsc481proj1_Graph_cpp
+
 #include "Graph.h"
 
 Graph::Graph() {
     nodes = map<char *, Node>();
 }
 
-void Graph::addNode(char *nodeName) {
+void Graph::addNode(char * nodeName) {
     addNode(Node(nodeName));
 }
 
@@ -31,3 +33,5 @@ void Graph::addNode(Node nodeToAdd) {
     else
         nodes.insert(pair<char *, Node>(nodeToAdd.getNodeName(), nodeToAdd));
 }
+
+#endif
