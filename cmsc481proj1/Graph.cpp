@@ -17,12 +17,12 @@ void Graph::addNode(char *nodeName) {
     addNode(Node(nodeName));
 }
 
-Node Graph::getNode(char * nodeName) {
+Node * Graph::getNode(char * nodeName) {
     
     if(nodes.find(nodeName) == nodes.end())
-        return Node(0);
+        return 0;
     else
-        return nodes[nodeName];
+        return &nodes[nodeName];
 }
 
 void Graph::addNode(Node nodeToAdd) {

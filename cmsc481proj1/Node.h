@@ -17,14 +17,15 @@ class Node {
     
 public:
     Node(char * nodeName);
-    void addLink(Node pointB, int weight);
-    pair<pair<Node, int> *, int> getLinks();
+    void addLink(Node * pointB, int weight);
+    pair<pair<Node *, int> *, int> getLinks();
+    bool isLinked(Node * otherNode);
     bool operator==(const Node otherNode);
     bool operator==(const Node * otherNode);
     char * getNodeName();
     
 private:
-    map<Node, int> neighbors;
+    map<Node *, int> neighbors;
     char * nodeName;
 };
 

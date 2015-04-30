@@ -18,7 +18,7 @@ class Graph {
 public:
     Graph();
     void addNode(char * nodeName);
-    Node getNode(char * nodeName);
+    Node * getNode(char * nodeName);
     
 protected:
     void addNode(Node nodeToAdd);
