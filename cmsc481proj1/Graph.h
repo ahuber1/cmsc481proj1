@@ -24,7 +24,7 @@ protected:
     void addNode(Node nodeToAdd);
     
 private:
-    map<char *, Node> nodes;
+    map<char *, Node, bool(*)(char*,char*)> nodes;
 };
 
 #endif

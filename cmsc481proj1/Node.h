@@ -26,7 +26,7 @@ public:
     char * getNodeName();
     
 private:
-    map<Node *, int> neighbors;
+    map<Node *, int, bool(*)(Node *, Node *)> neighbors;
     char * nodeName;
 };
 

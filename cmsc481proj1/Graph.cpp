@@ -12,8 +12,15 @@
 #include "Graph.h"
 #include <iostream>
 
+bool compare(char * left, char * right) {
+    char l = *left;
+    char r = *right;
+    
+    return l < r;
+}
+
 Graph::Graph() {
-    nodes = map<char *, Node>();
+    nodes = map<char *, Node,bool(*)(char *,char *)>(compare);
 }
 
 void Graph::addNode(char * nodeName) {

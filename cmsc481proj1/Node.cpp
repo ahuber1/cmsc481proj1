@@ -15,13 +15,22 @@
 
 using namespace std;
 
+bool comparator(Node * left, Node * right) {
+    char * l_name_ptr = left->getNodeName();
+    char * r_name_ptr = right->getNodeName();
+    char l_name = *l_name_ptr;
+    char r_name = *r_name_ptr;
+    
+    return l_name < r_name;
+}
+
 Node::Node() {
     Node(0);
 }
 
 Node::Node(char * nodeName) {
     this->nodeName = nodeName;
-    neighbors = map<Node *, int>();
+    neighbors = map<Node *, int, bool(*)(Node *, Node *)>(comparator);
 }
 
 void Node::addLink(Node * pointB, int weight) {
