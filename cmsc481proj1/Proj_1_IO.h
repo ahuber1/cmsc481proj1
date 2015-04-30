@@ -14,9 +14,8 @@
 #include <fstream>
 #include "DijkstraGraph.h"
 
-void processBuffer(char * buffer, const int BUFFER_SIZE, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName);
-
 void readFile(char * fileName, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName);
-
+void processBuffer(char * buffer, const int BUFFER_SIZE, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName);
+void processTokens(string * tokens, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName);
 
 #endif /* defined(__cmsc481proj1__Proj_1_IO__) */
