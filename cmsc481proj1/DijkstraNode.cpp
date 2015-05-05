@@ -24,11 +24,11 @@ DijkstraNode::DijkstraNode(char * nodeName) : Node(nodeName) {
     shortestNeighbor = 0;
 }
 
-pair<pair<Node *, int> *, int> DijkstraNode::getUnvisitedLinks() {
-    pair<pair<Node *, int> *, int> allLinksPair = getLinks();
-    pair<Node *, int> * allLinks = allLinksPair.first;
+pair<pair<Node *, unsigned int> *, unsigned int> DijkstraNode::getUnvisitedLinks() {
+    pair<pair<Node *, unsigned int> *, unsigned int> allLinksPair = getLinks();
+    pair<Node *, unsigned int> * allLinks = allLinksPair.first;
     int arrayLen = allLinksPair.second;
-    pair<Node *, int> * unvisitedLinks = new pair<Node *,int>[arrayLen];
+    pair<Node *, unsigned int> * unvisitedLinks = new pair<Node *, unsigned int>[arrayLen];
     int all = 0;
     int unvisited = 0;
     
@@ -45,14 +45,14 @@ pair<pair<Node *, int> *, int> DijkstraNode::getUnvisitedLinks() {
         all++;
     }
     
-    return pair<pair<Node *, int> *, int>(unvisitedLinks, unvisited);
+    return pair<pair<Node *, unsigned int> *, unsigned int>(unvisitedLinks, unvisited);
 }
 
-void DijkstraNode::setShortestNeighbor(pair<Node *, int> * shortestNeighbor) {
+void DijkstraNode::setShortestNeighbor(pair<Node *, unsigned int> * shortestNeighbor) {
     this->shortestNeighbor = shortestNeighbor;
 }
 
-pair<Node *, int> DijkstraNode::getShortestNeighbor() {
+pair<Node *, unsigned int> DijkstraNode::getShortestNeighbor() {
     return *shortestNeighbor;
 }
 

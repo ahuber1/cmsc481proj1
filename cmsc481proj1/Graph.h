@@ -19,12 +19,13 @@ public:
     Graph();
     void addNode(char * nodeName);
     Node * getNode(char * nodeName);
+    pair<pair<char *, Node *> *, unsigned int> getAllNodes();
     
 protected:
     void addNode(Node nodeToAdd);
     
 private:
-    map<char *, Node, bool(*)(char*,char*)> nodes;
+    map<char *, Node *, bool(*)(char*,char*)> nodes;
 };
 
 #endif

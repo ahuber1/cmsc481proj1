@@ -30,10 +30,10 @@ Node::Node() {
 
 Node::Node(char * nodeName) {
     this->nodeName = nodeName;
-    neighbors = map<Node *, int, bool(*)(Node *, Node *)>(comparator);
+    neighbors = map<Node *, unsigned int, bool(*)(Node *, Node *)>(comparator);
 }
 
-void Node::addLink(Node * pointB, int weight) {
+void Node::addLink(Node * pointB, unsigned int weight) {
     if (neighbors.find(pointB) == neighbors.end())
         neighbors.insert(pair<Node *, int>(pointB, weight));
     else
@@ -41,7 +41,7 @@ void Node::addLink(Node * pointB, int weight) {
 }
 
 bool Node::isLinked(Node *otherNode) {
-    pair<pair<Node *, int> *, int> linksPair = getLinks();
+    pair<pair<Node *, unsigned int> *, unsigned int> linksPair = getLinks();
     
     for (int i = 0; i < linksPair.second; i++) {
         if (*linksPair.first[i].first == *otherNode)
@@ -51,17 +51,17 @@ bool Node::isLinked(Node *otherNode) {
     return false;
 }
 
-pair<pair<Node *, int> *, int> Node::getLinks() {
+pair<pair<Node *, unsigned int> *, unsigned int> Node::getLinks() {
     
-    pair<Node *, int> * links = new pair<Node *, int>[neighbors.size()];
-    int i = 0;
+    pair<Node *, unsigned int> * links = new pair<Node *, unsigned int>[neighbors.size()];
+    unsigned int i = 0;
     
-    for (map<Node *, int>::iterator it = neighbors.begin(); it != neighbors.end(); it++) {
-        links[i] = pair<Node *, int>(it->first, it->second);
+    for (map<Node *, unsigned int>::iterator it = neighbors.begin(); it != neighbors.end(); it++) {
+        links[i] = pair<Node *, unsigned int>(it->first, it->second);
         i++;
     }
     
-    return pair<pair<Node *, int> *, int>(links, i);
+    return pair<pair<Node *, unsigned int> *, unsigned int>(links, i);
 }
 
 bool Node::operator==(const Node otherNode) {

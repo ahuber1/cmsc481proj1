@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1A1DFE791AF2665100F91981 /* Proj_1_IO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A1DFE771AF2665100F91981 /* Proj_1_IO.cpp */; };
+		1A2D1E7D1AF2DD95004E106E /* Dijkstra.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D1E7B1AF2DD95004E106E /* Dijkstra.cpp */; };
 		1AC4D0351AF0239200C6D616 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4D0341AF0239200C6D616 /* main.cpp */; };
 		1AC4D0401AF037E700C6D616 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4D03F1AF037E700C6D616 /* Node.cpp */; };
 		1AC4D0421AF0751F00C6D616 /* DijkstraNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4D0411AF0751F00C6D616 /* DijkstraNode.cpp */; };
@@ -30,6 +31,8 @@
 /* Begin PBXFileReference section */
 		1A1DFE771AF2665100F91981 /* Proj_1_IO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Proj_1_IO.cpp; sourceTree = "<group>"; };
 		1A1DFE781AF2665100F91981 /* Proj_1_IO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Proj_1_IO.h; sourceTree = "<group>"; };
+		1A2D1E7B1AF2DD95004E106E /* Dijkstra.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Dijkstra.cpp; sourceTree = "<group>"; };
+		1A2D1E7C1AF2DD95004E106E /* Dijkstra.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Dijkstra.h; sourceTree = "<group>"; };
 		1A38E9C81AF2AD7F009D9E30 /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		1A38E9C91AF2AD7F009D9E30 /* TemplateIcon2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TemplateIcon2x.png; sourceTree = "<group>"; };
 		1AC4D0311AF0239200C6D616 /* cmsc481proj1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = cmsc481proj1; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +85,8 @@
 				1A38E9C81AF2AD7F009D9E30 /* input.txt */,
 				1A38E9C91AF2AD7F009D9E30 /* TemplateIcon2x.png */,
 				1AC4D03F1AF037E700C6D616 /* Node.cpp */,
+				1A2D1E7B1AF2DD95004E106E /* Dijkstra.cpp */,
+				1A2D1E7C1AF2DD95004E106E /* Dijkstra.h */,
 				1AC4D03B1AF0274D00C6D616 /* Graph.h */,
 				1AC4D0431AF0FBCD00C6D616 /* Graph.cpp */,
 				1AC4D03C1AF027CD00C6D616 /* Node.h */,
@@ -148,6 +153,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A1DFE791AF2665100F91981 /* Proj_1_IO.cpp in Sources */,
+				1A2D1E7D1AF2DD95004E106E /* Dijkstra.cpp in Sources */,
 				1AC4D0461AF0FF2300C6D616 /* DijkstraGraph.cpp in Sources */,
 				1AC4D0441AF0FBCD00C6D616 /* Graph.cpp in Sources */,
 				1AC4D0351AF0239200C6D616 /* main.cpp in Sources */,

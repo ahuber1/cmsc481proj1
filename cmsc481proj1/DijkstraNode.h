@@ -16,13 +16,13 @@ class DijkstraNode : public Node {
 public:
     DijkstraNode();
     DijkstraNode(char * nodeName);
-    pair<pair<Node *, int> *, int> getUnvisitedLinks();
-    void setShortestNeighbor(pair<Node *, int> * shortestNeighbor);
-    pair<Node *, int> getShortestNeighbor();
+    pair<pair<Node *, unsigned int> *, unsigned int> getUnvisitedLinks();
+    void setShortestNeighbor(pair<Node *, unsigned int> * shortestNeighbor);
+    pair<Node *,unsigned int> getShortestNeighbor();
     
 private:
     bool visited;
-    pair<Node *, int> * shortestNeighbor;
+    pair<Node *, unsigned int> * shortestNeighbor;
 };
 
 #endif
