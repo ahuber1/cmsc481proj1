@@ -9,8 +9,6 @@
 #ifndef cmsc481proj1_Node_cpp
 #define cmsc481proj1_Node_cpp
 
-#include <iostream>
-#include <stdio.h>
 #include "Node.h"
 
 using namespace std;
@@ -34,6 +32,7 @@ Node::Node(char * nodeName) {
 }
 
 void Node::addLink(Node * pointB, unsigned int weight) {
+    
     if (neighbors.find(pointB) == neighbors.end())
         neighbors.insert(pair<Node *, int>(pointB, weight));
     else
@@ -41,17 +40,17 @@ void Node::addLink(Node * pointB, unsigned int weight) {
 }
 
 bool Node::isLinked(Node *otherNode) {
-    pair<pair<Node *, unsigned int> *, unsigned int> linksPair = getLinks();
+    pair<pair<Node *, unsigned int> *, unsigned int> * linksPair = getLinks();
     
-    for (int i = 0; i < linksPair.second; i++) {
-        if (*linksPair.first[i].first == *otherNode)
+    for (int i = 0; i < linksPair->second; i++) {
+        if (*linksPair->first[i].first == *otherNode)
             return true;
     }
     
     return false;
 }
 
-pair<pair<Node *, unsigned int> *, unsigned int> Node::getLinks() {
+pair<pair<Node *, unsigned int> *, unsigned int> * Node::getLinks() {
     
     pair<Node *, unsigned int> * links = new pair<Node *, unsigned int>[neighbors.size()];
     unsigned int i = 0;
@@ -61,7 +60,7 @@ pair<pair<Node *, unsigned int> *, unsigned int> Node::getLinks() {
         i++;
     }
     
-    return pair<pair<Node *, unsigned int> *, unsigned int>(links, i);
+    return new pair<pair<Node *, unsigned int> *, unsigned int>(links, i);
 }
 
 bool Node::operator==(const Node otherNode) {

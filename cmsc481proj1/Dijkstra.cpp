@@ -6,52 +6,68 @@
 //  Copyright (c) 2015 Andrew Huber. All rights reserved.
 //
 
+#ifndef __cmsc481proj1__Dijkstra__cpp
+#define __cmsc481proj1__Dijkstra__cpp
+
 #include "Dijkstra.h"
-#include "DijkstraNode.h"
 
-void dijkstra(Node * currentNode) {
-    DijkstraNode * dnCurrentNode = static_cast<DijkstraNode *>(currentNode);
-    pair<pair<Node *, unsigned int> *, unsigned int> dnCurrentNodeUnvisitedLinksPair = dnCurrentNode->getUnvisitedLinks();
-    pair<Node *, unsigned int> * unvisitedLinks = dnCurrentNodeUnvisitedLinksPair.first;
-    unsigned int dnCurrentNodeNumberOfUnvisitedLinks = dnCurrentNodeUnvisitedLinksPair.second;
-    
-    DijkstraNode * nextNode = 0;
-    
-    for (int i = 0; i < dnCurrentNodeNumberOfUnvisitedLinks; i++) {
-        pair<Node *, unsigned int> unvisitedLinkPair = unvisitedLinks[i];
-        Node * unvisitedLink = unvisitedLinkPair.first;
-        DijkstraNode * dnUnvisitedLink = static_cast<DijkstraNode *>(unvisitedLink);
-        unsigned int weightOfUnvisitedLink = unvisitedLinkPair.second;
-        
-        pair<Node *, unsigned int> shortestLinkOfUnvisitedLinkPair = dnUnvisitedLink->getShortestNeighbor();
-        unsigned int weightOfShortestLinkOfUnvisitedLink = shortestLinkOfUnvisitedLinkPair.second;
-        
-        pair<Node *, unsigned int> shortestLinkOfCurrentNodePair = dnCurrentNode->getShortestNeighbor();
-        unsigned int weightOfShortestLink = shortestLinkOfCurrentNodePair.second;
-        
-        unsigned int calculatedWeight = weightOfUnvisitedLink + weightOfShortestLink;
-        if (weightOfShortestLinkOfUnvisitedLink > calculatedWeight) {
-            dnUnvisitedLink->setShortestNeighbor(new pair<Node *, unsigned int>(currentNode, calculatedWeight));
-        }
-        
-        if (nextNode == 0) {
-            nextNode = dnUnvisitedLink;
-        }
-        else if(dnUnvisitedLink->getShortestNeighbor().second < nextNode->getShortestNeighbor().second) {
-            Node * newNextNode = dnUnvisitedLink->getShortestNeighbor().first;
-            DijkstraNode * dnNewNextNode = static_cast<DijkstraNode *>(newNextNode);
-            nextNode = dnNewNextNode;
-        }
-    }
-    
-    if (nextNode != 0) {
-        dijkstra(currentNode);
-    }
+bool compareQueueData(char * left, char * right) {
+    return strcmp(left, right) < 0;
 }
 
-void dijkstra(DijkstraGraph * graph, char * startNode) {
-    Node * startNodePtr = graph->getNode(startNode);
-    DijkstraNode * dnStartNode = static_cast<DijkstraNode *>(startNodePtr);
-    dnStartNode->setShortestNeighbor(new pair<Node *, unsigned int>(0, 0));
-    dijkstra(dnStartNode);
+QueueData * findNextNode(map<char *, QueueData *, bool(*)(char*, char*)> * mapPtr) {
+    map<char *, QueueData *,bool(*)(char*,char*)> m = *mapPtr;
+    QueueData * nextNode = new QueueData(0);
+    
+    for (map<char *, QueueData *>::iterator it = m.begin(); it != m.end(); it++) {
+        QueueData * currNode = it->second;
+        
+        if(currNode->lowestCost < nextNode->lowestCost && currNode->visited == false)
+            nextNode = currNode;
+    }
+    
+    return nextNode;
 }
+
+map<char *, QueueData *,bool(*)(char *,char *)> * dijkstra(Graph * graph, char * startNode) {
+    map<char *, QueueData *,bool(*)(char *,char *)> * lowestCostData = new map<char *, QueueData *, bool(*)(char*, char*)>(compareQueueData);
+    pair<pair<char *, Node *> *, unsigned int> * graphNodesPair = graph->getAllNodes();
+    pair<char *, Node *> * graphNodes = graphNodesPair->first;
+    unsigned int numberOfNodes = graphNodesPair->second;
+    
+    for (int i = 0; i < numberOfNodes; i++) {
+        char * first = graphNodes[i].first;
+        Node * node = graphNodes[i].second;
+        QueueData * second = new QueueData(node);
+        lowestCostData->insert(pair<char *, QueueData *>(first, second));
+    }
+    
+    QueueData * currentNodeQueueData = lowestCostData->find(startNode)->second;
+    currentNodeQueueData->lowestCost = 0;
+    
+    for (int a = 0; a < numberOfNodes; a++) {
+        currentNodeQueueData->visited = true;
+        pair<pair<Node *, unsigned int> *, unsigned int> * linksPair = currentNodeQueueData->node->getLinks();
+        pair<Node *, unsigned int> * links = linksPair->first;
+        unsigned int numberOfLinks = linksPair->second;
+
+        for (int b = 0; b < numberOfLinks; b++) {
+            Node * currentLink = links[b].first;
+            unsigned int currentLinkWeight = links->second;
+            char * currentLinkName = currentLink->getNodeName();
+            QueueData * currentLinkQueueData = lowestCostData->find(currentLinkName)->second;
+            unsigned int calculatedWeight = currentNodeQueueData->lowestCost + currentLinkWeight;
+            
+            if (calculatedWeight < currentLinkQueueData->lowestCost) {
+                currentLinkQueueData->prev = currentNodeQueueData->node;
+                currentLinkQueueData->lowestCost = calculatedWeight;
+            }
+        }
+        
+        currentNodeQueueData = findNextNode(lowestCostData);
+    }
+    
+    return lowestCostData;
+}
+
+#endif

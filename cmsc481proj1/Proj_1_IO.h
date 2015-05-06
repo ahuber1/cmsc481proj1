@@ -13,8 +13,8 @@
 #include <iostream>
 #include <fstream>
 #include <map>
-#include "DijkstraGraph.h"
+#include "Graph.h"
 
-void readFile(char * fileName, DijkstraGraph * graph, char * sourceNodeName, char * destinationNodeName);
+void readFile(char * fileName, Graph * graph, char * sourceNodeName, char * destinationNodeName);
 
 #endif

@@ -7,19 +7,21 @@
 //
 
 #include <iostream>
-#include "DijkstraGraph.h"
+#include "Graph.h"
 #include "Proj_1_IO.h"
+#include "Dijkstra.h"
 
 int main(int argc, const char * argv[]) {
     
-    DijkstraGraph graph = DijkstraGraph();
-    
     char fileName[] = "/Users/andrew_huber/Dropbox/spring_2015/cmsc481/project1/code/cmsc481proj1/cmsc481proj1/input.txt";
-    DijkstraGraph * graphPtr = &graph;
+    Graph * graphPtr = new Graph();
     char sourceNodeName[100];
     char destinationNodeName[100];
     
     readFile(fileName, graphPtr, sourceNodeName, destinationNodeName);
+    dijkstra(graphPtr, sourceNodeName);
     
     return 0;
 }
+
+

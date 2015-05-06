@@ -9,12 +9,25 @@
 #ifndef __cmsc481proj1__Dijkstra__
 #define __cmsc481proj1__Dijkstra__
 
+#import "Graph.h"
 #import <climits>
-#import <map>
-#import "DijkstraGraph.h"
 
 using namespace std;
 
-void dijkstra(DijkstraGraph * graph, char * startNode);
+struct QueueData {
+    Node * node;
+    Node * prev;
+    unsigned int lowestCost;
+    bool visited;
+    
+    QueueData(Node * node) {
+        this->node = node;
+        this->prev = 0;
+        this->lowestCost = UINT_MAX;
+        this->visited = false;
+    }
+};
+
+map<char *, QueueData *,bool(*)(char *,char *)> * dijkstra(Graph * graph, char * startNode);
 
 #endif /* defined(__cmsc481proj1__Dijkstra__) */

@@ -19,7 +19,7 @@ public:
     Node();
     Node(char * nodeName);
     void addLink(Node * pointB, unsigned int weight);
-    pair<pair<Node *, unsigned int> *, unsigned int> getLinks();
+    pair<pair<Node *, unsigned int> *, unsigned int> * getLinks();
     bool isLinked(Node * otherNode);
     bool operator==(const Node otherNode);
     bool operator==(const Node * otherNode);

@@ -11,9 +11,7 @@
 		1A2D1E7D1AF2DD95004E106E /* Dijkstra.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A2D1E7B1AF2DD95004E106E /* Dijkstra.cpp */; };
 		1AC4D0351AF0239200C6D616 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4D0341AF0239200C6D616 /* main.cpp */; };
 		1AC4D0401AF037E700C6D616 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4D03F1AF037E700C6D616 /* Node.cpp */; };
-		1AC4D0421AF0751F00C6D616 /* DijkstraNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4D0411AF0751F00C6D616 /* DijkstraNode.cpp */; };
 		1AC4D0441AF0FBCD00C6D616 /* Graph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4D0431AF0FBCD00C6D616 /* Graph.cpp */; };
-		1AC4D0461AF0FF2300C6D616 /* DijkstraGraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1AC4D0451AF0FF2300C6D616 /* DijkstraGraph.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -39,12 +37,8 @@
 		1AC4D0341AF0239200C6D616 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		1AC4D03B1AF0274D00C6D616 /* Graph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Graph.h; sourceTree = "<group>"; };
 		1AC4D03C1AF027CD00C6D616 /* Node.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Node.h; sourceTree = "<group>"; };
-		1AC4D03D1AF0343F00C6D616 /* DijkstraNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DijkstraNode.h; sourceTree = "<group>"; };
-		1AC4D03E1AF0376300C6D616 /* DijkstraGraph.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DijkstraGraph.h; sourceTree = "<group>"; };
 		1AC4D03F1AF037E700C6D616 /* Node.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
-		1AC4D0411AF0751F00C6D616 /* DijkstraNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DijkstraNode.cpp; sourceTree = "<group>"; };
 		1AC4D0431AF0FBCD00C6D616 /* Graph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Graph.cpp; sourceTree = "<group>"; };
-		1AC4D0451AF0FF2300C6D616 /* DijkstraGraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DijkstraGraph.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,8 +72,6 @@
 			isa = PBXGroup;
 			children = (
 				1AC4D0341AF0239200C6D616 /* main.cpp */,
-				1AC4D03E1AF0376300C6D616 /* DijkstraGraph.h */,
-				1AC4D0451AF0FF2300C6D616 /* DijkstraGraph.cpp */,
 				1A1DFE771AF2665100F91981 /* Proj_1_IO.cpp */,
 				1A1DFE781AF2665100F91981 /* Proj_1_IO.h */,
 				1A38E9C81AF2AD7F009D9E30 /* input.txt */,
@@ -90,8 +82,6 @@
 				1AC4D03B1AF0274D00C6D616 /* Graph.h */,
 				1AC4D0431AF0FBCD00C6D616 /* Graph.cpp */,
 				1AC4D03C1AF027CD00C6D616 /* Node.h */,
-				1AC4D03D1AF0343F00C6D616 /* DijkstraNode.h */,
-				1AC4D0411AF0751F00C6D616 /* DijkstraNode.cpp */,
 			);
 			path = cmsc481proj1;
 			sourceTree = "<group>";
@@ -154,10 +144,8 @@
 			files = (
 				1A1DFE791AF2665100F91981 /* Proj_1_IO.cpp in Sources */,
 				1A2D1E7D1AF2DD95004E106E /* Dijkstra.cpp in Sources */,
-				1AC4D0461AF0FF2300C6D616 /* DijkstraGraph.cpp in Sources */,
 				1AC4D0441AF0FBCD00C6D616 /* Graph.cpp in Sources */,
 				1AC4D0351AF0239200C6D616 /* main.cpp in Sources */,
-				1AC4D0421AF0751F00C6D616 /* DijkstraNode.cpp in Sources */,
 				1AC4D0401AF037E700C6D616 /* Node.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
