@@ -10,6 +10,7 @@
 #define __cmsc481proj1__Dijkstra__cpp
 
 #include "Dijkstra.h"
+#include <iostream>
 
 bool compareQueueData(char * left, char * right) {
     return strcmp(left, right) < 0;
@@ -46,6 +47,9 @@ map<char *, QueueData *,bool(*)(char *,char *)> * dijkstra(Graph * graph, char *
     currentNodeQueueData->lowestCost = 0;
     
     for (int a = 0; a < numberOfNodes; a++) {
+        
+        cout << currentNodeQueueData->node->getNodeName() << ", " << currentNodeQueueData->lowestCost << endl;
+        
         currentNodeQueueData->visited = true;
         pair<pair<Node *, unsigned int> *, unsigned int> * linksPair = currentNodeQueueData->node->getLinks();
         pair<Node *, unsigned int> * links = linksPair->first;
@@ -53,7 +57,7 @@ map<char *, QueueData *,bool(*)(char *,char *)> * dijkstra(Graph * graph, char *
 
         for (int b = 0; b < numberOfLinks; b++) {
             Node * currentLink = links[b].first;
-            unsigned int currentLinkWeight = links->second;
+            unsigned int currentLinkWeight = links[b].second;
             char * currentLinkName = currentLink->getNodeName();
             QueueData * currentLinkQueueData = lowestCostData->find(currentLinkName)->second;
             unsigned int calculatedWeight = currentNodeQueueData->lowestCost + currentLinkWeight;
