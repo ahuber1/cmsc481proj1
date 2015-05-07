@@ -18,6 +18,6 @@
 #include "Dijkstra.h"
 
 void readFile(char * fileName, Graph * graph, char * sourceNodeName, char * destinationNodeName);
-void writeFile(char * fileName, stack<QueueData *> * results, char * sourceNodeName, char * desinationNodeName);
+void writeFile(char * fileName, ShortestPathData * data, char * sourceNodeName, char * desinationNodeName);
 
 #endif

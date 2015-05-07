@@ -29,7 +29,18 @@ struct QueueData {
     }
 };
 
+struct ShortestPathData {
+    map<char *, QueueData *,bool(*)(char *,char *)> * dijkstraResults;
+    stack<QueueData *> * shortestPathStack;
+    
+    ShortestPathData(map<char *, QueueData *,bool(*)(char *,char *)> * dijkstraResults, stack<QueueData *> * shortestPathStack) {
+        this->dijkstraResults = dijkstraResults;
+        this->shortestPathStack = shortestPathStack;
+    }
+};
+
 map<char *, QueueData *,bool(*)(char *,char *)> * dijkstra(Graph * graph, char * startNode);
-stack<QueueData *> * shortestPath(Graph * graph, char * startNode, char * endNode);
+ShortestPathData * shortestPath(Graph * graph, char * startNode, char * endNode);
+ShortestPathData * shortestPath(map<char *, QueueData *,bool(*)(char *,char *)> *  dijkstraMap, char * startNode, char * endNode);
 
 #endif /* defined(__cmsc481proj1__Dijkstra__) */

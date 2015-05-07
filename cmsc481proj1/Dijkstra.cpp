@@ -74,17 +74,22 @@ map<char *, QueueData *,bool(*)(char *,char *)> * dijkstra(Graph * graph, char *
     return lowestCostData;
 }
 
-stack<QueueData *> * shortestPath(Graph * graph, char * startNode, char * endNode) {
+ShortestPathData * shortestPath(Graph * graph, char * startNode, char * endNode) {
+    return shortestPath(dijkstra(graph, startNode), startNode, endNode);
+}
+
+ShortestPathData * shortestPath(map<char *, QueueData *,bool(*)(char *,char *)> * dijkstraMap, char * startNode, char * endNode) {
     stack<QueueData *> * steps = new stack<QueueData *>();
-    map<char *, QueueData *,bool(*)(char *,char *)> * results = dijkstra(graph, startNode);
-    QueueData * dq = results->find(endNode)->second;
+    QueueData * dq = dijkstraMap->find(endNode)->second;
     
     while(strcmp(dq->node->getNodeName(), startNode) != 0) {
         steps->push(dq);
-        dq = results->find(dq->prev->getNodeName())->second;
+        dq = dijkstraMap->find(dq->prev->getNodeName())->second;
     }
     
-    return steps;
+    steps->push(dq);
+    
+    return new ShortestPathData(dijkstraMap, steps);
 }
 
 #endif

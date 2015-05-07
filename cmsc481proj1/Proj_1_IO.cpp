@@ -10,7 +10,6 @@
 #define __cmsc481proj1__Proj_1_IO
 
 #include "Proj_1_IO.h"
-#include <queue>
 
 void processTokens(string * tokens, Graph * graph, char * sourceNodeName, char * destinationNodeName) {
     
@@ -99,47 +98,119 @@ void readFile(char * fileName, Graph * graph, char * sourceNodeName, char * dest
         throw 4; // ERROR 4: unable to open file
 }
 
-void makeRoutingTable(QueueData * qd, ofstream * outputFilePtr) {
+pair<unsigned int *, unsigned int> * findAllNodesAfterNode(QueueData ** dijkstraData, unsigned int lengthOfDijkstraData, char * nodeName) {
+    unsigned int indicies[lengthOfDijkstraData];
+    unsigned int index;
     
+    for (unsigned int i = 0; i < lengthOfDijkstraData; i++) {
+        if (dijkstraData[i]->prev != 0 && strcmp(dijkstraData[i]->prev->getNodeName(), nodeName) == 0) {
+            indicies[index] = i;
+            index++;
+        }
+    }
+    
+    return new pair<unsigned int *, unsigned int>(indicies, index);
 }
 
-void writeFile(char * fileName, stack<QueueData *> * results, char * sourceNodeName, char * desinationNodeName) {
-    const char * separator = "------------------------------------------------";
-    queue<QueueData *> que = queue<QueueData *>();
+void updateRouteTable(QueueData ** dijkstraData, QueueData ** routeTable, unsigned int lengthOfDijstraData, Node * node, Node * currNode) {
+    pair<unsigned int *, unsigned int> * nextNodePair = findAllNodesAfterNode(dijkstraData, lengthOfDijstraData, currNode->getNodeName());
+    unsigned int * indiciesOfNextNodes = nextNodePair->first;
+    unsigned int numberOfNextNodes = nextNodePair->second;
+    
+    for (unsigned int i = 0; i < numberOfNextNodes; i++) {
+        if (node == currNode) {
+            routeTable[indiciesOfNextNodes[i]]->prev = routeTable[indiciesOfNextNodes[i]]->node;
+        }
+        else {
+            routeTable[indiciesOfNextNodes[i]]->prev = currNode;
+        }
+        
+        updateRouteTable(dijkstraData, routeTable, lengthOfDijstraData, node, routeTable[indiciesOfNextNodes[i]]->node);
+    }
+}
+
+QueueData ** makeRouteTable(Graph * graph, Node * node, QueueData ** dijkstraData, unsigned int lengthOfRouteTable) {
+    pair<pair<char *, Node *> *, unsigned int> * allNodesPair = graph->getAllNodes();
+    pair<char *, Node *> * allNodes = allNodesPair->first;
+    unsigned int numberOfNodesInGraph = allNodesPair->second;
+    QueueData ** routeTable = new QueueData * [numberOfNodesInGraph];
+    unsigned int indexOfNode = 0;
+    
+    for(int i = 0; i < numberOfNodesInGraph; i++) {
+        routeTable[i] = new QueueData(allNodes[i].second);
+        
+        if(strcmp(routeTable[i]->node->getNodeName(), node->getNodeName()) == 0) {
+            indexOfNode = i;
+        }
+    }
+
+    updateRouteTable(dijkstraData, routeTable, lengthOfRouteTable, routeTable[indexOfNode]->node, routeTable[indexOfNode]->node);
+    return routeTable;
+}
+
+void printRouteTable(Graph * graph, Node * node, QueueData ** dijkstraData, unsigned int lengthOfRouteTable, ostream * outputFile) {
+    *outputFile << "Route Table of Node " << node->getNodeName() << " (Format [To, Next Hop, Distance])" << endl;
+    QueueData ** routeTable = makeRouteTable(graph, node, dijkstraData, lengthOfRouteTable);
+    
+    for (unsigned int i = 0; i < lengthOfRouteTable; i++) {
+        QueueData * entry = routeTable[i];
+        unsigned int distance = dijkstraData[i]->lowestCost;
+        
+        if (entry->prev != 0) {
+            *outputFile << "[" << entry->node->getNodeName() << ", " << entry->prev->getNodeName() << ", " << distance << "]" << endl;
+        }
+    }
+    *outputFile << endl;
+}
+
+void writeFile(char * fileName, Graph * graph, ShortestPathData * data, char * sourceNodeName, char * desinationNodeName) {
     ofstream outputFile;
     outputFile.open(fileName);
 
-    outputFile << separator << " (beginning of summary)" << endl;
-    outputFile << "The shortest path from " << sourceNodeName << " to " << desinationNodeName << " is:" << endl;
-    outputFile << "\t";
-    
-    unsigned int totalDistance = results->top()->lowestCost;
-    
-    while (results->size() > 0) {
-        QueueData * qd = results->top();
+    if(outputFile.is_open()) {
+        const char * separator = "------------------------------------------------";
         
-        results->pop();
-        que.push(qd);
+        outputFile << separator << " (beginning of summary)" << endl;
+        outputFile << "The shortest path from " << sourceNodeName << " to " << desinationNodeName << " is:" << endl;
+        outputFile << "\t";
         
-        outputFile << qd->node->getNodeName();
+        unsigned int totalDistance = data->shortestPathStack->top()->lowestCost;
         
-        if (results->size() > 0) {
-            outputFile << " -> ";
+        while (data->shortestPathStack->size() > 0) {
+            QueueData * qd = data->shortestPathStack->top();
+            
+            data->shortestPathStack->pop();
+            
+            outputFile << qd->node->getNodeName();
+            
+            if (data->shortestPathStack->size() > 0) {
+                outputFile << " -> ";
+            }
+            else {
+                outputFile << endl;
+            }
         }
-        else {
-            outputFile << endl;
-        }
-    }
-    
-    outputFile << "\tTotal Distance: " << totalDistance << endl;
+        
+        outputFile << "\tTotal Distance: " << totalDistance << endl;
         outputFile << separator << " (end of summary)" << endl;
-    
-    while (que.size() > 0) {
-        makeRoutingTable(que.front(), &outputFile);
-        que.pop();
+        
+        QueueData * dijkstraData[(unsigned int) data->dijkstraResults->size()];
+        unsigned int index = 0;
+        
+        for (map<char *, QueueData *,bool(*)(char *,char *)>::iterator it = data->dijkstraResults->begin(); it != data->
+             dijkstraResults->end(); it++) {
+
+            dijkstraData[index] = it->second;
+        }
+        
+        for (index = 0; index < data->dijkstraResults->size(); index++) {
+            printRouteTable(graph, dijkstraData[index]->node, dijkstraData, (unsigned int) data->dijkstraResults->size(), &outputFile);
+        }
+        
+        outputFile.close();
     }
-    
-    outputFile.close();
+    else
+        throw 5; // ERROR 5: unable to open file
 }
 
 #endif

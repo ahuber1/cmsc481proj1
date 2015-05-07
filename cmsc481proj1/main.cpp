@@ -13,15 +13,15 @@
 
 int main(int argc, const char * argv[]) {
     
-    char fileName[] = "/Users/andrew_huber/Dropbox/spring_2015/cmsc481/project1/code/cmsc481proj1/cmsc481proj1/input.txt";
+    char inputFileName[] = "/Users/andrew_huber/Dropbox/spring_2015/cmsc481/project1/code/cmsc481proj1/cmsc481proj1/input.txt";
+    char outputFileName[] = "/Users/andrew_huber/Dropbox/spring_2015/cmsc481/project1/code/cmsc481proj1/cmsc481proj1/output.txt";
     Graph * graphPtr = new Graph();
     char sourceNodeName[100];
     char destinationNodeName[100];
     
-    readFile(fileName, graphPtr, sourceNodeName, destinationNodeName);
-    stack<QueueData *> * results = shortestPath(graphPtr, sourceNodeName, destinationNodeName);
-    
-    
+    readFile(inputFileName, graphPtr, sourceNodeName, destinationNodeName);
+    ShortestPathData * results = shortestPath(graphPtr, sourceNodeName, destinationNodeName);
+    writeFile(outputFileName, results, sourceNodeName, destinationNodeName);
     
     return 0;
 }
