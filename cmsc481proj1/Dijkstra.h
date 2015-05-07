@@ -11,6 +11,7 @@
 
 #import "Graph.h"
 #import <climits>
+#import <stack>
 
 using namespace std;
 
@@ -29,5 +30,6 @@ struct QueueData {
 };
 
 map<char *, QueueData *,bool(*)(char *,char *)> * dijkstra(Graph * graph, char * startNode);
+stack<QueueData *> * shortestPath(Graph * graph, char * startNode, char * endNode);
 
 #endif /* defined(__cmsc481proj1__Dijkstra__) */

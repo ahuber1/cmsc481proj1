@@ -19,7 +19,9 @@ int main(int argc, const char * argv[]) {
     char destinationNodeName[100];
     
     readFile(fileName, graphPtr, sourceNodeName, destinationNodeName);
-    dijkstra(graphPtr, sourceNodeName);
+    stack<QueueData *> * results = shortestPath(graphPtr, sourceNodeName, destinationNodeName);
+    
+    
     
     return 0;
 }

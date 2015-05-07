@@ -13,8 +13,11 @@
 #include <iostream>
 #include <fstream>
 #include <map>
+#include <stack>
 #include "Graph.h"
+#include "Dijkstra.h"
 
 void readFile(char * fileName, Graph * graph, char * sourceNodeName, char * destinationNodeName);
+void writeFile(char * fileName, stack<QueueData *> * results, char * sourceNodeName, char * desinationNodeName);
 
 #endif

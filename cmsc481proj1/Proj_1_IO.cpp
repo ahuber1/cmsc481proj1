@@ -10,6 +10,7 @@
 #define __cmsc481proj1__Proj_1_IO
 
 #include "Proj_1_IO.h"
+#include <queue>
 
 void processTokens(string * tokens, Graph * graph, char * sourceNodeName, char * destinationNodeName) {
     
@@ -96,6 +97,49 @@ void readFile(char * fileName, Graph * graph, char * sourceNodeName, char * dest
     }
     else
         throw 4; // ERROR 4: unable to open file
+}
+
+void makeRoutingTable(QueueData * qd, ofstream * outputFilePtr) {
+    
+}
+
+void writeFile(char * fileName, stack<QueueData *> * results, char * sourceNodeName, char * desinationNodeName) {
+    const char * separator = "------------------------------------------------";
+    queue<QueueData *> que = queue<QueueData *>();
+    ofstream outputFile;
+    outputFile.open(fileName);
+
+    outputFile << separator << " (beginning of summary)" << endl;
+    outputFile << "The shortest path from " << sourceNodeName << " to " << desinationNodeName << " is:" << endl;
+    outputFile << "\t";
+    
+    unsigned int totalDistance = results->top()->lowestCost;
+    
+    while (results->size() > 0) {
+        QueueData * qd = results->top();
+        
+        results->pop();
+        que.push(qd);
+        
+        outputFile << qd->node->getNodeName();
+        
+        if (results->size() > 0) {
+            outputFile << " -> ";
+        }
+        else {
+            outputFile << endl;
+        }
+    }
+    
+    outputFile << "\tTotal Distance: " << totalDistance << endl;
+        outputFile << separator << " (end of summary)" << endl;
+    
+    while (que.size() > 0) {
+        makeRoutingTable(que.front(), &outputFile);
+        que.pop();
+    }
+    
+    outputFile.close();
 }
 
 #endif
