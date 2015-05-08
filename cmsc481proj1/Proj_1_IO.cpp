@@ -99,7 +99,7 @@ void readFile(char * fileName, Graph * graph, char * sourceNodeName, char * dest
         throw 4; // ERROR 4: unable to open file
 }
 
-pair<unsigned int *, unsigned int> * findAllNodesAfterNode(QueueData ** dijkstraData, unsigned int lengthOfDijkstraData, char * nodeName) {
+pair<unsigned int *, unsigned int> * findAllImmediateAndSubsequentNeighbors(QueueData ** dijkstraData, unsigned int lengthOfDijkstraData, char * nodeName) {
     unsigned int * indicies = new unsigned int[lengthOfDijkstraData];
     unsigned int index = 0;
     
@@ -115,8 +115,8 @@ pair<unsigned int *, unsigned int> * findAllNodesAfterNode(QueueData ** dijkstra
     return new pair<unsigned int *, unsigned int>(indicies, index);
 }
 
-Node * updateRouteTable(QueueData ** dijkstraData, QueueData ** routeTable, unsigned int lengthOfDijstraData, Node * node, Node * currNode, unsigned int level) {
-    pair<unsigned int *, unsigned int> * nextNodePair = findAllNodesAfterNode(dijkstraData, lengthOfDijstraData, currNode->getNodeName());
+Node * updateNextHops(QueueData ** dijkstraData, QueueData ** routeTable, unsigned int lengthOfDijstraData, Node * node, Node * currNode, unsigned int level) {
+    pair<unsigned int *, unsigned int> * nextNodePair = findAllImmediateAndSubsequentNeighbors(dijkstraData, lengthOfDijstraData, currNode->getNodeName());
     unsigned int * indiciesOfNextNodes = nextNodePair->first;
     unsigned int numberOfNextNodes = nextNodePair->second;
     
@@ -125,10 +125,10 @@ Node * updateRouteTable(QueueData ** dijkstraData, QueueData ** routeTable, unsi
         Node * prev = 0;
         
         if(level == 0) {
-            prev = updateRouteTable(dijkstraData, routeTable, lengthOfDijstraData, routeTable[indiciesOfNextNodes[i]]->node, routeTable[indiciesOfNextNodes[i]]->node, level + 1);
+            prev = updateNextHops(dijkstraData, routeTable, lengthOfDijstraData, routeTable[indiciesOfNextNodes[i]]->node, routeTable[indiciesOfNextNodes[i]]->node, level + 1);
         }
         else {
-            prev = updateRouteTable(dijkstraData, routeTable, lengthOfDijstraData, node, routeTable[indiciesOfNextNodes[i]]->node, level + 1);
+            prev = updateNextHops(dijkstraData, routeTable, lengthOfDijstraData, node, routeTable[indiciesOfNextNodes[i]]->node, level + 1);
 
         }
 
@@ -154,7 +154,7 @@ QueueData ** makeRouteTable(Graph * graph, Node * node, QueueData ** dijkstraDat
         }
     }
 
-    updateRouteTable(dijkstraData, routeTable, lengthOfRouteTable, routeTable[indexOfNode]->node, routeTable[indexOfNode]->node, 0);
+    updateNextHops(dijkstraData, routeTable, lengthOfRouteTable, routeTable[indexOfNode]->node, routeTable[indexOfNode]->node, 0);
     return routeTable;
 }
 
