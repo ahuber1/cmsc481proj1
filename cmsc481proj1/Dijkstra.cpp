@@ -46,10 +46,7 @@ map<char *, QueueData *,bool(*)(char *,char *)> * dijkstra(Graph * graph, char *
     QueueData * currentNodeQueueData = lowestCostData->find(startNode)->second;
     currentNodeQueueData->lowestCost = 0;
     
-    for (int a = 0; a < numberOfNodes; a++) {
-        
-        cout << currentNodeQueueData->node->getNodeName() << ", " << currentNodeQueueData->lowestCost << endl;
-        
+    for (int a = 0; a < numberOfNodes; a++) {        
         currentNodeQueueData->visited = true;
         pair<pair<Node *, unsigned int> *, unsigned int> * linksPair = currentNodeQueueData->node->getLinks();
         pair<Node *, unsigned int> * links = linksPair->first;

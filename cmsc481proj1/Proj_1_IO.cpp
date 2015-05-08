@@ -10,6 +10,7 @@
 #define __cmsc481proj1__Proj_1_IO
 
 #include "Proj_1_IO.h"
+#include <iomanip>
 
 void processTokens(string * tokens, Graph * graph, char * sourceNodeName, char * destinationNodeName) {
     
@@ -99,34 +100,42 @@ void readFile(char * fileName, Graph * graph, char * sourceNodeName, char * dest
 }
 
 pair<unsigned int *, unsigned int> * findAllNodesAfterNode(QueueData ** dijkstraData, unsigned int lengthOfDijkstraData, char * nodeName) {
-    unsigned int indicies[lengthOfDijkstraData];
-    unsigned int index;
+    unsigned int * indicies = new unsigned int[lengthOfDijkstraData];
+    unsigned int index = 0;
     
     for (unsigned int i = 0; i < lengthOfDijkstraData; i++) {
-        if (dijkstraData[i]->prev != 0 && strcmp(dijkstraData[i]->prev->getNodeName(), nodeName) == 0) {
-            indicies[index] = i;
-            index++;
+        if (dijkstraData[i]->prev != 0) {
+            if(strcmp(dijkstraData[i]->prev->getNodeName(), nodeName) == 0) {
+                indicies[index] = i;
+                index++;
+            }
         }
     }
     
     return new pair<unsigned int *, unsigned int>(indicies, index);
 }
 
-void updateRouteTable(QueueData ** dijkstraData, QueueData ** routeTable, unsigned int lengthOfDijstraData, Node * node, Node * currNode) {
+Node * updateRouteTable(QueueData ** dijkstraData, QueueData ** routeTable, unsigned int lengthOfDijstraData, Node * node, Node * currNode, unsigned int level) {
     pair<unsigned int *, unsigned int> * nextNodePair = findAllNodesAfterNode(dijkstraData, lengthOfDijstraData, currNode->getNodeName());
     unsigned int * indiciesOfNextNodes = nextNodePair->first;
     unsigned int numberOfNextNodes = nextNodePair->second;
     
     for (unsigned int i = 0; i < numberOfNextNodes; i++) {
-        if (node == currNode) {
-            routeTable[indiciesOfNextNodes[i]]->prev = routeTable[indiciesOfNextNodes[i]]->node;
+        
+        Node * prev = 0;
+        
+        if(level == 0) {
+            prev = updateRouteTable(dijkstraData, routeTable, lengthOfDijstraData, routeTable[indiciesOfNextNodes[i]]->node, routeTable[indiciesOfNextNodes[i]]->node, level + 1);
         }
         else {
-            routeTable[indiciesOfNextNodes[i]]->prev = currNode;
+            prev = updateRouteTable(dijkstraData, routeTable, lengthOfDijstraData, node, routeTable[indiciesOfNextNodes[i]]->node, level + 1);
+
         }
-        
-        updateRouteTable(dijkstraData, routeTable, lengthOfDijstraData, node, routeTable[indiciesOfNextNodes[i]]->node);
+
+        routeTable[indiciesOfNextNodes[i]]->prev = prev;
     }
+    
+    return node;
 }
 
 QueueData ** makeRouteTable(Graph * graph, Node * node, QueueData ** dijkstraData, unsigned int lengthOfRouteTable) {
@@ -138,28 +147,46 @@ QueueData ** makeRouteTable(Graph * graph, Node * node, QueueData ** dijkstraDat
     
     for(int i = 0; i < numberOfNodesInGraph; i++) {
         routeTable[i] = new QueueData(allNodes[i].second);
+        routeTable[i]->lowestCost = dijkstraData[i]->lowestCost;
         
         if(strcmp(routeTable[i]->node->getNodeName(), node->getNodeName()) == 0) {
             indexOfNode = i;
         }
     }
 
-    updateRouteTable(dijkstraData, routeTable, lengthOfRouteTable, routeTable[indexOfNode]->node, routeTable[indexOfNode]->node);
+    updateRouteTable(dijkstraData, routeTable, lengthOfRouteTable, routeTable[indexOfNode]->node, routeTable[indexOfNode]->node, 0);
     return routeTable;
 }
 
 void printRouteTable(Graph * graph, Node * node, QueueData ** dijkstraData, unsigned int lengthOfRouteTable, ostream * outputFile) {
-    *outputFile << "Route Table of Node " << node->getNodeName() << " (Format [To, Next Hop, Distance])" << endl;
+    *outputFile << "Route Table of Node " << node->getNodeName() << endl << endl;
+    
     QueueData ** routeTable = makeRouteTable(graph, node, dijkstraData, lengthOfRouteTable);
+    bool atLeastOneEntry = false;
     
     for (unsigned int i = 0; i < lengthOfRouteTable; i++) {
         QueueData * entry = routeTable[i];
         unsigned int distance = dijkstraData[i]->lowestCost;
         
         if (entry->prev != 0) {
-            *outputFile << "[" << entry->node->getNodeName() << ", " << entry->prev->getNodeName() << ", " << distance << "]" << endl;
+            if(strcmp(entry->node->getNodeName(), node->getNodeName()) != 0) {
+                
+                if(!atLeastOneEntry) {
+                    *outputFile << "\tTO    NEXT HOP    DISTANCE" << endl;
+                }
+                
+                *outputFile << "\t" << setw(2) << entry->node->getNodeName() << setw(0) << "    ";
+                *outputFile << setw(8) << entry->prev->getNodeName() << setw(0) << "    ";
+                *outputFile << setw(8) << distance << setw(0) << endl;
+                atLeastOneEntry = true;
+            }
         }
     }
+    
+    if(!atLeastOneEntry) {
+        *outputFile << "\tEMPTY" << endl;
+    }
+    
     *outputFile << endl;
 }
 
@@ -174,9 +201,11 @@ void writeFile(char * fileName, Graph * graph, ShortestPathData * data, char * s
         outputFile << "The shortest path from " << sourceNodeName << " to " << desinationNodeName << " is:" << endl;
         outputFile << "\t";
         
-        unsigned int totalDistance = data->shortestPathStack->top()->lowestCost;
+        unsigned int totalDistance = 0;
         
         while (data->shortestPathStack->size() > 0) {
+            totalDistance = data->shortestPathStack->top()->lowestCost;
+            
             QueueData * qd = data->shortestPathStack->top();
             
             data->shortestPathStack->pop();
@@ -201,6 +230,7 @@ void writeFile(char * fileName, Graph * graph, ShortestPathData * data, char * s
              dijkstraResults->end(); it++) {
 
             dijkstraData[index] = it->second;
+            index++;
         }
         
         for (index = 0; index < data->dijkstraResults->size(); index++) {

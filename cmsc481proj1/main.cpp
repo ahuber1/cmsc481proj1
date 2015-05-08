@@ -21,7 +21,7 @@ int main(int argc, const char * argv[]) {
     
     readFile(inputFileName, graphPtr, sourceNodeName, destinationNodeName);
     ShortestPathData * results = shortestPath(graphPtr, sourceNodeName, destinationNodeName);
-    writeFile(outputFileName, results, sourceNodeName, destinationNodeName);
+    writeFile(outputFileName, graphPtr, results, sourceNodeName, destinationNodeName);
     
     return 0;
 }
