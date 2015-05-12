@@ -95,8 +95,10 @@ void readFile(char * fileName, Graph * graph, char * sourceNodeName, char * dest
             processBuffer(buffer, BUFFER_SIZE, graph, sourceNodeName, destinationNodeName);
         }
     }
-    else
+    else {
+        printf("Unable to open %s\n", fileName);
         throw 4; // ERROR 4: unable to open file
+    }
 }
 
 pair<unsigned int *, unsigned int> * findAllImmediateAndSubsequentNeighbors(QueueData ** dijkstraData, unsigned int lengthOfDijkstraData, char * nodeName) {
