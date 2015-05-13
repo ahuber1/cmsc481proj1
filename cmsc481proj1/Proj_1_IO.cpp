@@ -14,7 +14,7 @@
 
 // After a line of the input file is read and the string is separated into tokens, this function analyzes the tokens by either
 // adding node(s) to the graph, adding link(s) to the graph, and/or setting sourceNodeName or destinationNodeName
-//
+
 void processTokens(string * tokens, // a string array containing the tokens
                    
                    Graph * graph, // a pointer to the Graph being built
@@ -118,8 +118,14 @@ void processBuffer(char * buffer, // the buffer to process
 // Reads the contents of the file line by line. Then, for each line read, the line is sent to void
 // processBuffer(char *, const int, Graph *, char *, char *)
 
-void readFile(char * fileName, Graph * graph, char * sourceNodeName, char * destinationNodeName) {
-    
+void readFile(char * fileName, // the name of the input file
+              
+              Graph * graph, // the graph to which we will add nodes
+              
+              char * sourceNodeName, // a char pointer that will be updated to contain the name of the source node
+              
+              char * destinationNodeName) // a char pointer that will be updated to contain the name of the destination node
+{
     ifstream file;
     file.open(fileName);
     const int BUFFER_SIZE = 100;

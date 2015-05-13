@@ -17,7 +17,25 @@
 #include "Graph.h"
 #include "Dijkstra.h"
 
-void readFile(char * fileName, Graph * graph, char * sourceNodeName, char * destinationNodeName);
-void writeFile(char * fileName, Graph * graph, ShortestPathData * data, char * sourceNodeName, char * desinationNodeName);
+// Writes the results of Dijkstra to an output file
 
+void writeFile(char * fileName, // the name of the output file
+               
+               Graph * graph, // the graph to which Dijkstra's was applied
+               
+               ShortestPathData * data, // the information returned by Dijkstra's
+               
+               char * sourceNodeName, // the name of the source node
+               
+               char * desinationNodeName); // the name of the destination node
+
+// Reads the input file and constructs a graph
+
+void readFile(char * fileName, // the name of the input file
+              
+              Graph * graph, // the graph to which we will add nodes
+              
+              char * sourceNodeName, // a char pointer that will be updated to contain the name of the source node
+              
+              char * destinationNodeName) // a char pointer that will be updated to contain the name of the destination node
 #endif
