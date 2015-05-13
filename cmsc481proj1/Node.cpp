@@ -3,7 +3,8 @@
 //  cmsc481proj1
 //
 //  Created by Andrew Huber on 4/28/2015.
-//  Copyright (c) 2015 Andrew Huber. All rights reserved.
+//
+//
 //
 
 #ifndef cmsc481proj1_Node_cpp
@@ -13,6 +14,7 @@
 
 using namespace std;
 
+// A custom comparator used in the map
 bool comparator(Node * left, Node * right) {
     char * l_name_ptr = left->getNodeName();
     char * r_name_ptr = right->getNodeName();
@@ -31,6 +33,7 @@ Node::Node(char * nodeName) {
     neighbors = map<Node *, unsigned int, bool(*)(Node *, Node *)>(comparator);
 }
 
+// Connects two nodes: this node is assumed to be point A
 void Node::addLink(Node * pointB, unsigned int weight) {
     
     if (neighbors.find(pointB) == neighbors.end())
@@ -39,6 +42,8 @@ void Node::addLink(Node * pointB, unsigned int weight) {
         throw 1; // ERROR 1: duplicate links
 }
 
+
+// Tests whether or not two links are linked
 bool Node::isLinked(Node *otherNode) {
     pair<pair<Node *, unsigned int> *, unsigned int> * linksPair = getLinks();
     
@@ -50,6 +55,7 @@ bool Node::isLinked(Node *otherNode) {
     return false;
 }
 
+// Gets all the nodes that this node is connected to
 pair<pair<Node *, unsigned int> *, unsigned int> * Node::getLinks() {
     
     pair<Node *, unsigned int> * links = new pair<Node *, unsigned int>[neighbors.size()];
