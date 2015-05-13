@@ -3,7 +3,8 @@
 //  cmsc481proj1
 //
 //  Created by Andrew Huber on 4/30/2015.
-//  Copyright (c) 2015 Andrew Huber. All rights reserved.
+//
+//  Performs the I/O operations for this project
 //
 
 #ifndef __cmsc481proj1__Proj_1_IO__
