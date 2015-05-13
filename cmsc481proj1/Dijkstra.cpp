@@ -107,8 +107,11 @@ map<char *, QueueData *,bool(*)(char *,char *)> * dijkstra(Graph * graph, // the
 // RETURNS: a pointer to a ShortestPathData containing information regarding the shortest patch
 
 ShortestPathData * shortestPath(Graph * graph, // a pointer to a Graph
+                                
                                 char * startNode, // the name of the start node
-                                char * endNode) { // the name of the end node
+                                
+                                char * endNode)  // the name of the end node
+{
     return shortestPath(dijkstra(graph, startNode), startNode, endNode);
 }
 
@@ -117,7 +120,12 @@ ShortestPathData * shortestPath(Graph * graph, // a pointer to a Graph
 //
 // RETURNS: a pointer to a ShortestPathData containing information regarding the shortest path
 
-ShortestPathData * shortestPath(map<char *, QueueData *,bool(*)(char *,char *)> * dijkstraMap, char * startNode, char * endNode) {
+ShortestPathData * shortestPath(map<char *, QueueData *,bool(*)(char *,char *)> * dijkstraMap, // the results from Dijkstra
+                                
+                                char * startNode, // the name of the start node
+                                
+                                char * endNode) // the name of the end node
+{
 
     // This stack will contain the steps that one will take along the shortest path. When each QueueData pointer is popped, each step
     // from startNode to endNode is revealed
