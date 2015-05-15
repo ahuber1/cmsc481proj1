@@ -11,6 +11,7 @@
 
 #include "Graph.h"
 
+// Comparator used by the map
 bool compare(char * left, char * right) {
     char l = *left;
     char r = *right;
@@ -18,21 +19,36 @@ bool compare(char * left, char * right) {
     return l < r;
 }
 
+// Makes a new Graph
 Graph::Graph() {
     nodes = map<char *, Node *,bool(*)(char *,char *)>(compare);
 }
 
-void Graph::addNode(char * nodeName) {
+// Adds a node to the graph
+void Graph::addNode(char * nodeName) // the name of the node to add
+{
     addNode(new Node(nodeName));
 }
 
-Node * Graph::getNode(char * nodeName) {
+// Gets a node that matches a certain name
+//
+// RETURNS: the node corresponding to "codeName" or 0 if it does not exist in the graph
+
+Node * Graph::getNode(char * nodeName) // the name of the node to retrieve
+{
     
     if(nodes.find(nodeName) == nodes.end())
         return 0;
     else
         return nodes.find(nodeName)->second;
 }
+
+// Gets all the nodes in this graph
+//
+// RETURNS: a pair pointer (p1) containing an array of pair pointers (p2)
+// as the key and an unsigned int containing the length of the array p2. Each pointer
+// in p2 contains a char pointer that specifies the name of the node and a Node pointer
+// containing the node in the graph with that name
 
 pair<pair<char *, Node *> *, unsigned int> * Graph::getAllNodes() {
     pair<char *, Node *> * nodeList = new pair<char *, Node *>[nodes.size()];
@@ -46,7 +62,10 @@ pair<pair<char *, Node *> *, unsigned int> * Graph::getAllNodes() {
     return new pair<pair<char *, Node *> *, unsigned int>(nodeList, i);
 }
 
-void Graph::addNode(Node * nodeToAdd) {
+// Adds a node to the graph
+
+void Graph::addNode(Node * nodeToAdd) // The node to add to the graph
+{
     if (nodes.find(nodeToAdd->getNodeName()) == nodes.end())
         nodes.insert(pair<char *, Node *>(nodeToAdd->getNodeName(), nodeToAdd));
     else

@@ -24,17 +24,22 @@ bool comparator(Node * left, Node * right) {
     return l_name < r_name;
 }
 
+// Makes a new node and sets this node name to 0 (null)
 Node::Node() {
     Node(0);
 }
 
-Node::Node(char * nodeName) {
+// Creates a new node with a certain node name
+Node::Node(char * nodeName) // the name of the node
+{
     this->nodeName = nodeName;
     neighbors = map<Node *, unsigned int, bool(*)(Node *, Node *)>(comparator);
 }
 
-// Connects two nodes: this node is assumed to be point A
-void Node::addLink(Node * pointB, unsigned int weight) {
+// Connects two nodes: this node is considered to be point A
+void Node::addLink(Node * pointB, // the other Node to connect to
+                   unsigned int weight) // the weight between the two nodes
+{
     
     if (neighbors.find(pointB) == neighbors.end())
         neighbors.insert(pair<Node *, int>(pointB, weight));
@@ -43,7 +48,10 @@ void Node::addLink(Node * pointB, unsigned int weight) {
 }
 
 
-// Tests whether or not two links are linked
+// Tests whether or not this node is connected with "otherNode"
+//
+// RETURNS: true if this node is connected with "otherNode",
+// false if it is not
 bool Node::isLinked(Node *otherNode) {
     pair<pair<Node *, unsigned int> *, unsigned int> * linksPair = getLinks();
     
@@ -56,6 +64,12 @@ bool Node::isLinked(Node *otherNode) {
 }
 
 // Gets all the nodes that this node is connected to
+//
+// RETURNS: a pair pointer (p1) that contains an array of pair pointers
+// (p2) and an unsigned int (l) that specifies the size of p2. In p2,
+// each pair pointer has a Node pointer as the key and an unsigned int
+// as the value. The Node pointer specifies a Node to which this node is
+// connnected to and the unsigned int specifies the weight of that link.
 pair<pair<Node *, unsigned int> *, unsigned int> * Node::getLinks() {
     
     pair<Node *, unsigned int> * links = new pair<Node *, unsigned int>[neighbors.size()];
